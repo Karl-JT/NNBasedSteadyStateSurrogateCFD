@@ -14,26 +14,26 @@ from keras.layers import LeakyReLU
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
-from excelToNumpy import X_array, Y_array, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from excelToNumpy import X_array, Y_array, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 
 
 def encoderDecoder():
     cnn = Sequential()
-    cnn.add(Conv2D(128, (16,8), input_shape=(128, 256, 3), activation='relu'))
-    cnn.add(Conv2D(512, (4,4), activation='relu'))
-    
-    cnn.add(Conv2DTranspose(512, (8,8), activation='relu'))
-    cnn.add(Conv2DTranspose(256, (8,4), activation='relu'))
-    cnn.add(Conv2DTranspose(32, (2,2), activation='relu'))
-    cnn.add(Conv2DTranspose(1, (2,2), activation='relu'))
+    cnn.add(Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 3), activation='relu'))
+    cnn.add(Conv2D(512, (4,4), padding='same', activation='relu'))
+
+    cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
+    cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
+    cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
+    cnn.add(Conv2DTranspose(3, (2,2), padding='same', activation='relu'))
     
     #cnn.add(MaxPooling2D(pool_size=(2, 2)))
     #cnn.add(Flatten())
 
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
     
-    cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], batch_size = 1, nb_epoch = 1000)
+    cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], batch_size = 1, epochs = 1000)
 
 # For trial purposes
 encoderDecoder()
-y_predict = cnn.predict(np.reshape(X_array3U[14],(1,101,201,3)))
+y_predict = cnn.predict(np.reshape(X_array3U[14],(1,128,256,3)))
