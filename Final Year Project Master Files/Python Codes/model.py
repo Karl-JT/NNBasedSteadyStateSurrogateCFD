@@ -11,11 +11,21 @@ from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
 from keras.layers import LeakyReLU
+from keras.callbacks import History
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
 from excelToNumpy import X_array, Y_array, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from helperFunctions import *
 
+"""
+class LossHistory(keras.callbacks.Callback):
+    def on_train_begin(self, logs={}):
+        self.losses = []
+
+    def on_batch_end(self, batch, logs={}):
+        self.losses.append(logs.get('loss'))
+"""
 
 def encoderDecoder():
     cnn = Sequential()
@@ -32,7 +42,10 @@ def encoderDecoder():
 
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
     
-    cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], batch_size = 1, epochs = 1000)
+    #history = LossHistory()
+    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], batch_size = 1, epochs = 3)
+    history = cnnModel.History()
+    plotLoss(history)
 
 # For trial purposes
 encoderDecoder()
