@@ -8,8 +8,8 @@ Created on Mon Jan  7 14:59:08 2019
 import matplotlib.pyplot as plt
 
 def plotLoss(historyDict):
-    lossValues = historyDict['loss']
-    valLossValues = historyDict['val_loss']
+    lossValues = historyDict.history['loss']
+    valLossValues = historyDict.history['val_loss']
     
     epochs = range(1, len(lossValues)+1)
     

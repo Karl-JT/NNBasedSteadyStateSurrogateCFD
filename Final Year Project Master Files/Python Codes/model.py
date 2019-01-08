@@ -15,7 +15,7 @@ from keras.callbacks import History
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
-from excelToNumpy import X_array, Y_array, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 from helperFunctions import *
 
 
@@ -43,10 +43,11 @@ def encoderDecoder():
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
     
     #history = LossHistory()
-    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], batch_size = 1, epochs = 2)
-    history = cnnModel.History()
-    plotLoss(history)
+    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 2)
+    plotLoss(cnnModel)
+
+    y_predict = cnn.predict(np.reshape(X_array3U[14], (1, 128, 256, 3)))
     
 # For trial purposes
 encoderDecoder()
-y_predict = cnn.predict(np.reshape(X_array3U[14],(1,128,256,3)))
+# y_predict = cnn.predict(np.reshape(X_array3U[14],(1,128,256,3)))

@@ -11,7 +11,7 @@ import pandas as pd
 
 os.chdir('..')
 os.chdir('..')
-wdir = os.chdir(os.getcwd()+'\\LinkedFolder')
+wdir = os.chdir(os.getcwd()+'/LinkedFolder')
 
 
 trainingCases = os.listdir(os.getcwd())
@@ -24,7 +24,7 @@ Y_array3U = np.zeros((trainingCasesListLen, 128, 256, 3))
 
 for count in range(trainingCasesListLen):
     # Open final iteration to get output array
-    os.chdir(os.getcwd()+'\\'+trainingCases[count]+'\\postProcessing\\sampleDict\\15')
+    os.chdir(os.getcwd()+'/'+trainingCases[count]+'/postProcessing/sampleDict/15')
     print(os.getcwd())
     rawData = pd.read_csv('data_U.csv')
 
@@ -35,7 +35,7 @@ for count in range(trainingCasesListLen):
         
     # Open first iteration to get input array
     os.chdir('..')
-    os.chdir(os.getcwd()+'\\0')
+    os.chdir(os.getcwd()+'/0')
     rawData2 = pd.read_csv('data_U.csv')
     
     for x in range(len(rawData2)):
@@ -64,4 +64,4 @@ for count in range(len(Y_array)):
                 X_array3U_negGeometry[count, y, x] = (-1, -1, -1)
 
 os.chdir('..')
-os.chdir(os.getcwd()+'\\Final Year Project Master Files\\Python Codes')
+os.chdir(os.getcwd()+'/Final Year Project Master Files/Python Codes')
