@@ -35,11 +35,6 @@ boundaryField
     {
 	type 		empty;
     }
-	
-    fixedWalls
-    {
-        type            noSlip;
-    }
 
     obstacle
     {

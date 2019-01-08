@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-5
+4
 (
     inlet
     {
@@ -26,7 +26,7 @@ FoamFile
     outlet
     {
         type            patch;
-        nFaces          50;
+        nFaces          150;
         startFace       4730;
     }
     upAndBottom
@@ -34,14 +34,7 @@ FoamFile
         type            empty;
         inGroups        1(empty);
         nFaces          4800;
-        startFace       4780;
-    }
-    fixedWalls
-    {
-        type            wall;
-        inGroups        1(wall);
-        nFaces          100;
-        startFace       9580;
+        startFace       4880;
     }
     obstacle
     {
