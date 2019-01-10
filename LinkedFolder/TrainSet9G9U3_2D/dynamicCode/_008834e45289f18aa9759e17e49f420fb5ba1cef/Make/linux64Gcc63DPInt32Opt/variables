@@ -1,0 +1,1 @@
+LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libcodeStream_008834e45289f18aa9759e17e49f420fb5ba1cef
