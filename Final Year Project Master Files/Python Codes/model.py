@@ -40,14 +40,27 @@ def encoderDecoder():
     #cnn.add(MaxPooling2D(pool_size=(2, 2)))
     #cnn.add(Flatten())
 
+    # Load weights
+    if checkSaveExist() == 1:
+        loadWeights(cnn)
+        print("Weights are loaded from saved model.")
+
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     #history = LossHistory()
-    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 50)
+    if checkSaveExist() == 0:
+        cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 1)
 
+    # Serialize model to JSON
+    model_json = cnn.to_json()
+    with open("model.json", "w") as json_file:
+        json_file.write(model_json)
+    # serialize weights to HDF5
+    cnn.save_weights("model.h5")
+    print("Saved model to disk")
 
     y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[14], (1, 128, 256, 3)))
-    print(y_predict)
+    print(y_predict[:,:,:,0])
     plotLoss(cnnModel)
 
 # For trial purposes
