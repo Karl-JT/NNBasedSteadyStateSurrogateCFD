@@ -43,7 +43,7 @@ def encoderDecoder():
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     #history = LossHistory()
-    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 10)
+    cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 50)
 
 
     y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[14], (1, 128, 256, 3)))
