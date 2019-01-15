@@ -64,4 +64,4 @@ for count in range(len(Y_array)):
                 X_array3U_negGeometry[count, y, x] = (-1, -1, -1)
 
 os.chdir('..')
-os.chdir(os.getcwd()+'/Final Year Project Master Files/Python Codes')
+os.chdir(os.getcwd()+'/FYP_MasterFiles/Python Codes')

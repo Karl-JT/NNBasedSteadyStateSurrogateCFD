@@ -64,17 +64,17 @@ vertices #codeStream
 
 blocks
 (
-    hex (8 17 3 18 29 38 24 39) (20 20 1) simpleGrading (1 1 1)
-    hex (9 8 18 19 30 29 39 40) (20 20 1) simpleGrading (1 1 1)
-    hex (4 9 19 20 25 30 40 41) (20 20 1) simpleGrading (1 1 1)
-    hex (5 10 9 4 26 31 30 25) (20 20 1) simpleGrading (1 1 1)
-    hex (11 4 20 0 32 25 41 21) (20 20 1) simpleGrading (1 1 1)
-    hex (12 5 4 11 33 26 25 32) (20 20 1) simpleGrading (1 1 1)
-    hex (13 6 5 12 34 27 26 33) (20 20 1) simpleGrading (1 1 1)
-    hex (1 14 6 13 22 35 27 34) (20 20 1) simpleGrading (1 1 1)
-    hex (14 15 7 6 35 36 28 27) (20 20 1) simpleGrading (1 1 1)
-    hex (15 2 16 7 36 23 37 28) (20 20 1) simpleGrading (1 1 1)
-    hex (7 16 17 8 28 37 38 29) (20 20 1) simpleGrading (1 1 1)
+    hex (29 38 24 39 8 17 3 18) (20 20 1) simpleGrading (1 1 1)
+    hex (30 29 39 40 9 8 18 19) (20 20 1) simpleGrading (1 1 1)
+    hex (25 30 40 41 4 9 19 20) (20 20 1) simpleGrading (1 1 1)
+    hex (26 31 30 25 5 10 9 4) (20 20 1) simpleGrading (1 1 1)
+    hex (32 25 41 21 11 4 20 0) (20 20 1) simpleGrading (1 1 1)
+    hex (33 26 25 32 12 5 4 11) (20 20 1) simpleGrading (1 1 1)
+    hex (34 27 26 33 13 6 5 12) (20 20 1) simpleGrading (1 1 1)
+    hex (22 35 27 34 1 14 6 13) (20 20 1) simpleGrading (1 1 1)
+    hex (35 36 28 27 14 15 7 6) (20 20 1) simpleGrading (1 1 1)
+    hex (36 23 37 28 15 2 16 7) (20 20 1) simpleGrading (1 1 1)
+    hex (28 37 38 29 7 16 17 8) (20 20 1) simpleGrading (1 1 1)
 );
 
 edges
