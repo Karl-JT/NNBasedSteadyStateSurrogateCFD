@@ -1,1 +1,4 @@
 These are all the 2D cases
+
+G1-G15 are squares/ rectangles
+G16++ are L shapes
