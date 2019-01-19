@@ -6,8 +6,10 @@ Created on Mon Jan  7 14:59:08 2019
 """
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plotLoss(historyDict):
+    # Plots training loss and validation loss
     lossValues = historyDict.history['loss']
     valLossValues = historyDict.history['val_loss']
 
@@ -22,6 +24,7 @@ def plotLoss(historyDict):
     return
 
 def checkSaveExist():
+    # Checks if model.h5 file exists in directory
     import os
     listDir = os.listdir(os.getcwd())
     if "model.h5" in listDir:
@@ -31,5 +34,12 @@ def checkSaveExist():
         return 0
 
 def loadWeights(model):
+    # Load model weights from h5py file
     model.load_weights("model.h5")
     return
+
+def plotArray(array):
+    # Takes in array and displays array as image with colourbar
+    img = plt.imshow(Y_array[0], interpolation='nearest')
+    plt.colorbar(img)
+    plt.show()
