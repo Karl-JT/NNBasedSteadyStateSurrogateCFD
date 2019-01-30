@@ -49,7 +49,7 @@ def encoderDecoder():
 
     #history = LossHistory()
     if checkSaveExist() == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 1)
+        cnnModel = cnn.fit(X_array3U_negGeometry[:49], Y_array3U[:49], validation_split=0.3, batch_size = 1, epochs = 1)
 
     # Serialize model to JSON
     model_json = cnn.to_json()
@@ -59,7 +59,7 @@ def encoderDecoder():
     cnn.save_weights("model.h5")
     print("Saved model to disk")
 
-    y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[14], (1, 128, 256, 3)))
+    y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[50], (1, 128, 256, 3)))
     print(y_predict[:,:,:,0])
     plotLoss(cnnModel)
 
