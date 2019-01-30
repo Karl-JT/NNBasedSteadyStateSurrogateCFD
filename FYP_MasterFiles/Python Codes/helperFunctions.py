@@ -36,10 +36,14 @@ def checkSaveExist():
 def loadWeights(model):
     # Load model weights from h5py file
     model.load_weights("model.h5")
+    print("Weights are loaded from saved model.")
     return
 
 def plotArray(array):
     # Takes in array and displays array as image with colourbar
-    img = plt.imshow(Y_array[0], interpolation='nearest')
-    plt.colorbar(img)
+    img = plt.imshow(Y_array, interpolation='nearest')
+    plt.colorbar(img, shrink = 0.62)
+    plt.axis([0,256, 0, 128])
+    plt.ylabel('Y')
+    plt.xlabel('X')
     plt.show()

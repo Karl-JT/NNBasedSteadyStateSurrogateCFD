@@ -63,5 +63,6 @@ for count in range(len(Y_array)):
                 Y_array3U_negGeometry[count, y, x] = (-1, -1, -1)
                 X_array3U_negGeometry[count, y, x] = (-1, -1, -1)
 
+# Reset to Python Codes directory
 os.chdir('..')
 os.chdir(os.getcwd()+'/FYP_MasterFiles/Python Codes')

@@ -43,7 +43,6 @@ def encoderDecoder():
     # Load weights
     if checkSaveExist() == 1:
         loadWeights(cnn)
-        print("Weights are loaded from saved model.")
 
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 

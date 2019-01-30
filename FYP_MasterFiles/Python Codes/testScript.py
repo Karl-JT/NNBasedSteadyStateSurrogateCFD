@@ -12,5 +12,8 @@ import numpy as np
 
 
 xx = plt.imshow(Y_array[0], interpolation='nearest')
-plt.colorbar(xx)
+plt.colorbar(xx, shrink = 0.62)
+plt.axis([0,256, 0, 128])
+plt.ylabel('Y')
+plt.xlabel('X')
 plt.show()
