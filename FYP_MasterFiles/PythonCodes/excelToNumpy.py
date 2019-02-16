@@ -65,4 +65,4 @@ for count in range(len(Y_array)):
 
 # Reset to Python Codes directory
 os.chdir('..')
-os.chdir(os.getcwd()+'/FYP_MasterFiles/Python Codes')
+os.chdir(os.getcwd()+'/FYP_MasterFiles/PythonCodes')
