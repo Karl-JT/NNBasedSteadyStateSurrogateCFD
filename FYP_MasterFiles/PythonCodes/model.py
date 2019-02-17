@@ -48,7 +48,7 @@ def encoderDecoder():
 
     #history = LossHistory()
     if checkSaveExist() == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:14], Y_array3U[:14], validation_split=0.3, batch_size = 1, epochs = 10)
+        cnnModel = cnn.fit(X_array3U_negGeometry[:50], Y_array3U[:50], validation_split=0.3, batch_size = 1, epochs = 100)
 
     # Serialize model to JSON
     model_json = cnn.to_json()
@@ -60,6 +60,7 @@ def encoderDecoder():
 
     y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[50], (1, 128, 256, 3)))
     print(y_predict[:,:,:,0])
+    plotArray(y_predict)
     plotLoss(cnnModel)
 
 # For trial purposes
