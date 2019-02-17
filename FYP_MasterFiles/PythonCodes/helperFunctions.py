@@ -8,7 +8,7 @@ Created on Mon Jan  7 14:59:08 2019
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import Image
+from PIL import Image
 
 def plotLoss(historyDict):
     # Plots training loss and validation loss
