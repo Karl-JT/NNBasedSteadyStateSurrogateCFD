@@ -60,7 +60,7 @@ def encoderDecoder():
 
     y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[50], (1, 128, 256, 3)))
     print(y_predict[:,:,:,0])
-    plotArray(y_predict)
+    plotArray(y_predict[:,:,:,0])
     plotLoss(cnnModel)
 
 # For trial purposes
