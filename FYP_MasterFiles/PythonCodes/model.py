@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Dec 15 00:45:31 2018
-
-@author: Nigel
-"""
-
 from keras.models import Sequential
 from keras.layers import Conv2D, Conv1D, Conv2DTranspose
 from keras.layers import MaxPooling2D
@@ -16,6 +9,7 @@ from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
 from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from airfoilShapeExtractor import X_airfoil, Y_airfoil, X_airfoil3U, Y_airfoil3U, X_airfoil_negGeometry, Y_airfoil_negGeometry, X_airfoil3U_negGeometry, Y_airfoil3U_negGeometry
 from helperFunctions import *
 
 
@@ -28,6 +22,7 @@ class LossHistory(keras.callbacks.Callback):
 """
 
 def encoderDecoder():
+    name = 'EncoderDecoder'
     cnn = Sequential()
     cnn.add(Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 3), activation='relu'))
     cnn.add(Conv2D(512, (4,4), padding='same', activation='relu'))
@@ -41,27 +36,41 @@ def encoderDecoder():
     #cnn.add(Flatten())
 
     # Load weights
-    if checkSaveExist() == 1:
-        loadWeights(cnn)
+    if checkSaveExist(name) == 1:
+        loadWeights(cnn, name)
 
     cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     #history = LossHistory()
-    if checkSaveExist() == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:50], Y_array3U[:50], validation_split=0.3, batch_size = 1, epochs = 100)
+    if checkSaveExist(name) == 0:
+        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 1, epochs = 200)
 
     # Serialize model to JSON
     model_json = cnn.to_json()
-    with open("model.json", "w") as json_file:
+    weightsFile = name + '.h5'
+    jsonFile = name + '.json'
+    with open(jsonFile, 'w') as json_file:
         json_file.write(model_json)
     # serialize weights to HDF5
-    cnn.save_weights("model.h5")
-    print("Saved model to disk")
+    cnn.save_weights(weightsFile)
+    print("Saved model to disk as {}.".format(weightsFile))
 
-    y_predict = cnn.predict(np.reshape(X_array3U_negGeometry[50], (1, 128, 256, 3)))
+    y_predict = cnn.predict(np.reshape(X_airfoil3U_negGeometry, (1, 128, 256, 3)))
     print(y_predict[:,:,:,0])
-    plotArray(y_predict[:,:,:,0])
-    plotLoss(cnnModel)
+    
+    # Plot X velocity
+    tempName = name + 'Xvelocity'
+    plotArray(y_predict[:,:,:,0], tempName)
+    
+    # Plot Y velocity
+    tempName = name + 'Yvelocity'
+    plotArray(y_predict[:,:,:,1], tempName)
+    
+    # Plot Z velocity
+    tempName = name + 'Zvelocity'
+    plotArray(y_predict[:,:,:,2], tempName)
+    
+    plotLoss(cnnModel, name)
 
 # For trial purposes
 encoderDecoder()

@@ -1,16 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan  7 14:59:08 2019
-
-@author: Nigel
-"""
-
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 from PIL import Image
 
-def plotLoss(historyDict):
+def plotLoss(historyDict, name):
     # Plots training loss and validation loss
     lossValues = historyDict.history['loss']
     valLossValues = historyDict.history['val_loss']
@@ -22,33 +15,37 @@ def plotLoss(historyDict):
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
-    saveAsPNG('Loss')
+    imageName = name + 'Loss'
+    saveAsPNG(imageName)
     plt.show()
     return
 
-def checkSaveExist():
+def checkSaveExist(name):
     # Checks if model.h5 file exists in directory
     listDir = os.listdir(os.getcwd())
-    if "model.h5" in listDir:
-        print("A saved model exists. Loading saved model...")
+    weightsFile = name + '.h5'
+    if weightsFile in listDir:
+        print('A saved model {} exists. Loading saved model...'.format(weightsFile))
         return 1
     else:
         return 0
 
-def loadWeights(model):
+def loadWeights(model, name):
     # Load model weights from h5py file
-    model.load_weights("model.h5")
-    print("Weights are loaded from saved model.")
+    weightsFile = name + '.h5'
+    model.load_weights(weightsFile)
+    print('Weights are loaded from saved model {}.'.format(weightsFile))
     return
 
-def plotArray(array):
+def plotArray(array, name):
     # Takes in array and displays array as image with colourbar
     img = plt.imshow(array, interpolation='nearest')
     plt.colorbar(img, shrink = 0.62)
     plt.axis([0,256, 0, 128])
     plt.ylabel('Y')
     plt.xlabel('X')
-    saveAsPNG('Contour')
+    imageName = name + 'Contour'
+    saveAsPNG(imageName)
     plt.show()
     return
 
