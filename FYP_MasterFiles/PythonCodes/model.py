@@ -8,7 +8,7 @@ from keras.callbacks import History
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
-from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+#from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 from airfoilShapeExtractor import X_airfoil, Y_airfoil, X_airfoil3U, Y_airfoil3U, X_airfoil_negGeometry, Y_airfoil_negGeometry, X_airfoil3U_negGeometry, Y_airfoil3U_negGeometry
 from helperFunctions import *
 
@@ -39,38 +39,37 @@ def encoderDecoder():
     if checkSaveExist(name) == 1:
         loadWeights(cnn, name)
 
-    cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
+    cnnModel = cnn.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     #history = LossHistory()
     if checkSaveExist(name) == 0:
         cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 1, epochs = 200)
-
-    # Serialize model to JSON
-    model_json = cnn.to_json()
-    weightsFile = name + '.h5'
-    jsonFile = name + '.json'
-    with open(jsonFile, 'w') as json_file:
-        json_file.write(model_json)
-    # serialize weights to HDF5
-    cnn.save_weights(weightsFile)
-    print("Saved model to disk as {}.".format(weightsFile))
+        # Serialize model to JSON
+        model_json = cnn.to_json()
+        weightsFile = name + '.h5'
+        jsonFile = name + '.json'
+        with open(jsonFile, 'w') as json_file:
+            json_file.write(model_json)
+        # serialize weights to HDF5
+        cnn.save_weights(weightsFile)
+        print("Saved model to disk as {}.".format(weightsFile))
 
     y_predict = cnn.predict(np.reshape(X_airfoil3U_negGeometry, (1, 128, 256, 3)))
-    print(y_predict[:,:,:,0])
+    print('X velocity of predicted array is {}'.format(y_predict[:,:,:,0]))
     
     # Plot X velocity
     tempName = name + 'Xvelocity'
-    plotArray(y_predict[:,:,:,0], tempName)
+    plotArray(y_predict[0,:,:,0], tempName)
     
     # Plot Y velocity
     tempName = name + 'Yvelocity'
-    plotArray(y_predict[:,:,:,1], tempName)
+    plotArray(y_predict[0,:,:,1], tempName)
     
     # Plot Z velocity
     tempName = name + 'Zvelocity'
-    plotArray(y_predict[:,:,:,2], tempName)
+    plotArray(y_predict[0,:,:,2], tempName)
     
-    plotLoss(cnnModel, name)
+    #plotLoss(cnn, name)
 
 # For trial purposes
 encoderDecoder()
