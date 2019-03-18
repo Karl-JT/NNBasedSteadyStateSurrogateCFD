@@ -32,7 +32,7 @@ def encoderDecoder():
     cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(3, (2,2), padding='same', activation='relu'))
 
-    #cnn.add(MaxPooling2D(pool_size=(2, 2)))
+    #cnn.add(MaxPooling2D(pool_size=(2, 2))) 
     #cnn.add(Flatten())
 
     # Load weights

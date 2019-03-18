@@ -48,8 +48,8 @@ Y_array_negGeometry = Y_array
 X_array3U_negGeometry = X_array3U
 Y_array3U_negGeometry = Y_array3U
 for count in range(len(Y_array)):
-    for x in range(201):
-        for y in range(101):
+    for x in range(256):
+        for y in range(128):
             if Y_array[count, y, x] == 0:
                 Y_array_negGeometry[count, y, x] = -1
                 X_array_negGeometry[count, y, x] = -1
