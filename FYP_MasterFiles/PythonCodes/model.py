@@ -69,7 +69,7 @@ def encoderDecoder():
     tempName = name + 'Zvelocity'
     plotArray(y_predict[0,:,:,2], tempName)
     
-    #plotLoss(cnn, name)
+    plotLoss(cnnModel, test)
 
 # For trial purposes
 encoderDecoder()
