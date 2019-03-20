@@ -44,8 +44,8 @@ Y_airfoil_negGeometry = Y_airfoil
 X_airfoil3U_negGeometry = X_airfoil3U
 Y_airfoil3U_negGeometry = Y_airfoil3U
 for count in range(len(Y_airfoil)):
-    for x in range(201):
-        for y in range(101):
+    for x in range(256):
+        for y in range(128):
             if Y_airfoil[count, y, x] == 0:
                 Y_airfoil_negGeometry[count, y, x] = -1
                 X_airfoil_negGeometry[count, y, x] = -1
