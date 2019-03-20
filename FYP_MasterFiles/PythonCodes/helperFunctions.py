@@ -51,9 +51,7 @@ def plotArray(array, name):
 
 def saveAsPNG(name):
     # Saves plot as PNG file
-    os.chdir(os.getcwd()+'/plotImages')
     numImages = len(os.listdir(os.getcwd()))
     idx = numImages + 1
     plt.savefig(name+str(idx)+'.png')
-    os.chdir('..')
     return

@@ -43,7 +43,7 @@ def encoderDecoder():
 
     #history = LossHistory()
     if checkSaveExist(name) == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 1, epochs = 200)
+        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 10, epochs = 20)
         # Serialize model to JSON
         model_json = cnn.to_json()
         weightsFile = name + '.h5'
@@ -65,11 +65,11 @@ def encoderDecoder():
     tempName = name + 'Yvelocity'
     plotArray(y_predict[0,:,:,1], tempName)
     
-    # Plot Z velocity
+    # Plot Z velocity    
     tempName = name + 'Zvelocity'
     plotArray(y_predict[0,:,:,2], tempName)
     
-    plotLoss(cnnModel, test)
+    plotLoss(cnnModel, "test")
 
 # For trial purposes
 encoderDecoder()
