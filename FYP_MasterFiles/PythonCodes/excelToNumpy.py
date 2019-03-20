@@ -23,7 +23,7 @@ for count in range(trainingCasesListLen):
 
     for x in range(len(rawData)):
         tempLine = rawData.iloc[x]
-        Y_array3U[count, int(tempLine[1]),int(tempLine[0])] = (tempLine[3],tempLine[4],tempLine[5])
+        Y_array3U[count, int(tempLine[1]*10),int(tempLine[0]*10)] = (tempLine[3],tempLine[4],tempLine[5])
         Y_array[count, int(tempLine[1]*10),int(tempLine[0]*10)] = tempLine[3]
         
     # Open first iteration to get input array
@@ -33,7 +33,7 @@ for count in range(trainingCasesListLen):
     
     for x in range(len(rawData2)):
         tempLine = rawData2.iloc[x]
-        X_array3U[count, int(tempLine[1]),int(tempLine[0])] = (tempLine[3],tempLine[4],tempLine[5])
+        X_array3U[count, int(tempLine[1]*10),int(tempLine[0]*10)] = (tempLine[3],tempLine[4],tempLine[5])
         X_array[count, int(tempLine[1]*10),int(tempLine[0]*10)] = tempLine[3]    
     
     os.chdir('..')

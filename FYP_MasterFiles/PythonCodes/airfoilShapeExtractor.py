@@ -19,7 +19,7 @@ rawData = pd.read_csv('data_U.csv')
 
 for x in range(len(rawData)):
     tempLine = rawData.iloc[x]
-    Y_airfoil3U[0, int(tempLine[1]),int(tempLine[0])] = (tempLine[3],tempLine[4],tempLine[5])
+    Y_airfoil3U[0, int(tempLine[1]*10),int(tempLine[0]*10)] = (tempLine[3],tempLine[4],tempLine[5])
     Y_airfoil[0, int(tempLine[1]*10),int(tempLine[0]*10)] = tempLine[3]
         
 # Open first iteration to get input array
@@ -29,7 +29,7 @@ rawData2 = pd.read_csv('data_U.csv')
     
 for x in range(len(rawData2)):
     tempLine = rawData2.iloc[x]
-    X_airfoil3U[0, int(tempLine[1]),int(tempLine[0])] = (tempLine[3],tempLine[4],tempLine[5])
+    X_airfoil3U[0, int(tempLine[1]*10),int(tempLine[0]*10)] = (tempLine[3],tempLine[4],tempLine[5])
     X_airfoil[0, int(tempLine[1]*10),int(tempLine[0]*10)] = tempLine[3]    
     
 os.chdir('..')

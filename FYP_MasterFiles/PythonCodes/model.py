@@ -8,7 +8,7 @@ from keras.callbacks import History
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
-#from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 from airfoilShapeExtractor import X_airfoil, Y_airfoil, X_airfoil3U, Y_airfoil3U, X_airfoil_negGeometry, Y_airfoil_negGeometry, X_airfoil3U_negGeometry, Y_airfoil3U_negGeometry
 from helperFunctions import *
 
@@ -43,7 +43,7 @@ def encoderDecoder():
 
     #history = LossHistory()
     if checkSaveExist(name) == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 10, epochs = 20)
+        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 1, epochs = 5)
         # Serialize model to JSON
         model_json = cnn.to_json()
         weightsFile = name + '.h5'
