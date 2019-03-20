@@ -76,7 +76,7 @@ def encoderDecoder():
 
 # For trial purposes
 y_predict=encoderDecoder()
-y_predictX=y_predict[0:,:,0]
-y_predictY=y_predict[0:,:,1]
-y_predictZ=y_predict[0:,:,2]
+y_predictX=y_predict[0:,:,:,0]
+y_predictY=y_predict[0:,:,:,1]
+y_predictZ=y_predict[0:,:,:,2]
 #y_predict = cnn.predict(np.reshape(X_array3U[14],(1,128,256,3)))
