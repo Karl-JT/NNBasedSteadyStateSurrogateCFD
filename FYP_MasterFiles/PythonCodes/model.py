@@ -43,7 +43,7 @@ def encoderDecoder():
 
     #history = LossHistory()
     if checkSaveExist(name) == 0:
-        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 1, epochs = 5)
+        cnnModel = cnn.fit(X_array3U_negGeometry[:], Y_array3U[:], validation_split=0.3, batch_size = 10, epochs = 200)
         # Serialize model to JSON
         model_json = cnn.to_json()
         weightsFile = name + '.h5'
