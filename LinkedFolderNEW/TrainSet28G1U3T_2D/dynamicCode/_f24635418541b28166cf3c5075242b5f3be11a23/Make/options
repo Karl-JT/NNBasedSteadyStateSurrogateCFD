@@ -1,0 +1,9 @@
+/* dynamicCode:
+ * SHA1 = f24635418541b28166cf3c5075242b5f3be11a23
+ */
+EXE_INC = -g \
+
+
+LIB_LIBS = \
+    -lOpenFOAM \
+

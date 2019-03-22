@@ -1,0 +1,166 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+vertices #codeStream
+{
+    codeInclude
+    #{
+        #include "pointField.H"
+    #};
+
+    code
+    #{
+        pointField points(21);
+        points[0]  = point(0, 0, 0.5);
+        points[1]  = point(25.5, 0, 0.5);
+        points[2]  = point(25.5, 12.7, 0.5);
+        points[3]  = point(0, 12.7, 0.5);
+        points[4]  = point(9, 5, 0.5);
+        points[5]  = point(20, 5, 0.5);
+        points[6]  = point(23, 5, 0.5);
+        points[7]  = point(23, 7, 0.5);
+        points[8]  = point(9, 7, 0.5);
+        points[9]  = point(9, 6, 0.5);
+        points[10] = point(20, 6, 0.5);
+        points[11] = point(9, 0, 0.5);
+        points[12] = point(20, 0, 0.5);
+        points[13] = point(23, 0, 0.5);
+        points[14] = point(25.5, 5, 0.5);
+        points[15] = point(25.5, 7, 0.5);
+        points[16] = point(23, 12.7, 0.5);
+        points[17] = point(9, 12.7, 0.5);
+        points[18] = point(0, 7, 0.5);
+        points[19] = point(0, 6, 0.5);
+        points[20] = point(0, 5, 0.5);
+
+        // Duplicate z points
+        label sz = points.size();
+        points.setSize(2*sz);
+        for (label i = 0; i < sz; i++)
+        {
+            const point& pt = points[i];
+            points[i+sz] = point(pt.x(), pt.y(), -pt.z());
+        }
+
+        os  << points;
+    #};
+};
+
+
+blocks
+(
+    hex (29 38 24 39 8 17 3 18) (20 20 1) simpleGrading (1 1 1)
+    hex (30 29 39 40 9 8 18 19) (20 20 1) simpleGrading (1 1 1)
+    hex (25 30 40 41 4 9 19 20) (20 20 1) simpleGrading (1 1 1)
+    hex (26 31 30 25 5 10 9 4) (20 20 1) simpleGrading (1 1 1)
+    hex (32 25 41 21 11 4 20 0) (20 20 1) simpleGrading (1 1 1)
+    hex (33 26 25 32 12 5 4 11) (20 20 1) simpleGrading (1 1 1)
+    hex (34 27 26 33 13 6 5 12) (20 20 1) simpleGrading (1 1 1)
+    hex (22 35 27 34 1 14 6 13) (20 20 1) simpleGrading (1 1 1)
+    hex (35 36 28 27 14 15 7 6) (20 20 1) simpleGrading (1 1 1)
+    hex (36 23 37 28 15 2 16 7) (20 20 1) simpleGrading (1 1 1)
+    hex (28 37 38 29 7 16 17 8) (20 20 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (18 3 24 39)
+            (19 18 39 40)
+            (20 19 40 41)
+            (0 20 41 21)
+        );
+    }
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (36 23 2 15)
+            (35 36 15 14)
+            (22 35 14 1)
+
+            (38 24 3 17)
+            (37 38 17 16)
+            (23 37 16 2)
+
+            (11 0 21 32)
+            (12 11 32 33)
+            (13 12 33 34)
+            (1 13 34 22)
+        );
+    }
+    upAndBottom
+    {
+        type empty;
+        faces
+        (
+            (8 17 3 18)
+            (9 8 18 19)
+            (4 9 19 20)
+            (5 10 9 4)
+            (11 4 20 0)
+            (12 5 4 11)
+            (13 6 5 12)
+            (1 14 6 13)
+            (14 15 7 6)
+            (15 2 16 7)
+            (7 16 17 8)
+
+            (39 24 38 29)
+            (40 39 29 30)
+            (41 40 30 25)
+            (25 30 31 26)
+            (21 41 25 32)
+            (32 25 26 33)
+            (33 26 27 34)
+            (34 27 35 22)
+            (27 28 36 35)
+            (28 37 23 36)
+            (29 38 37 28)
+        );
+    }
+    obstacle
+    {
+        type wall;
+        faces
+        (
+            (8 9 30 29)
+            (9 10 31 30)
+            (10 5 26 31)
+            (5 6 27 26)
+            (6 7 28 27)
+            (7 8 29 28)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
