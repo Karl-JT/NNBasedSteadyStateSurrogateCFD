@@ -62,7 +62,7 @@ def encoderDecoderXVelocity():
         cnn.save_weights(weightsFile)
         print("Saved model to disk as {}.".format(weightsFile))
 
-    y_predictXVel = cnn.predict(np.reshape(X_airfoil3U_negGeometry[1,:,:,0], (1, 128, 256, 1)))
+    y_predictXVel = cnn.predict(np.reshape(X_airfoil3U_negGeometry[0,:,:,0], (1, 128, 256, 1)))
     print('X velocity of predicted array is {}'.format(y_predictXVel[:,:,:,0]))
     
     # Plot X velocity
@@ -110,7 +110,7 @@ def encoderDecoderYVelocity():
         cnn.save_weights(weightsFile)
         print("Saved model to disk as {}.".format(weightsFile))
 
-    y_predictYVel = cnn.predict(np.reshape(X_airfoil3U_negGeometry[1,:,:,1], (1, 128, 256, 1)))
+    y_predictYVel = cnn.predict(np.reshape(X_airfoil3U_negGeometry[0,:,:,1], (1, 128, 256, 1)))
     print('Y velocity of predicted array is {}'.format(y_predictYVel[:,:,:,0]))
        
     # Plot Y velocity
