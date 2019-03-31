@@ -35,7 +35,7 @@ def encoderDecoderXVelocity():
     cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='relu'))
+    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='linear'))
 
     #cnn.add(MaxPooling2D(pool_size=(2, 2))) 
     #cnn.add(Flatten())
@@ -69,7 +69,7 @@ def encoderDecoderXVelocity():
     tempName = name + 'Xvelocity'
     plotArray(y_predictXVel[0,:,:,0], tempName)
     
-    
+    print(cnn.summary())
     plotLoss(cnnModel, "encoderDecoderXVelocityLoss")
     
     return y_predictXVel
@@ -83,7 +83,7 @@ def encoderDecoderYVelocity():
     cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='relu'))
+    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='linear'))
 
     #cnn.add(MaxPooling2D(pool_size=(2, 2))) 
     #cnn.add(Flatten())
@@ -119,7 +119,7 @@ def encoderDecoderYVelocity():
     
     plotLoss(cnnModel, "encoderDecoderYVelocityLoss")
 
-
+    print(cnn.summary())
     return y_predictYVel
 
 # For trial purposes
