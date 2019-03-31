@@ -50,7 +50,7 @@ def encoderDecoderXVelocity():
     if checkSaveExist(name) == 0:
         len1 = len(X_array3U_negGeometry)
         input1 = np.reshape(X_array3U_negGeometry[:,:,:,0], (len1, 128, 256, 1))
-        output1 = np.reshape(Y_array3U_negGeometry[:,:,:,0], (len1, 128, 256, 1))
+        output1 = np.reshape(Y_array3U[:,:,:,0], (len1, 128, 256, 1))
         cnnModel = cnn.fit(input1, output1, validation_split=0.2, batch_size = 1, epochs = 100)
         # Serialize model to JSON
         model_json = cnn.to_json()
@@ -98,7 +98,7 @@ def encoderDecoderYVelocity():
     if checkSaveExist(name) == 0:
         len2 = len(X_array3U_negGeometry)
         input2 = np.reshape(X_array3U_negGeometry[:,:,:,1], (len2, 128, 256, 1) )
-        output2 = np.reshape(Y_array3U_negGeometry[:,:,:,1], (len2, 128, 256, 1))
+        output2 = np.reshape(Y_array3U[:,:,:,1], (len2, 128, 256, 1))
         cnnModel = cnn.fit(input2, output2, validation_split=0.2, batch_size = 1, epochs = 100)
         # Serialize model to JSON
         model_json = cnn.to_json()
