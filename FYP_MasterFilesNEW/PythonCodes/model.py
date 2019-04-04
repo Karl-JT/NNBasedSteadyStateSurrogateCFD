@@ -8,6 +8,8 @@ from keras.callbacks import History
 from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
+from keras.layers import Input, Reshape
+from keras.models import Model
 
 from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 #from excelToNumpy import X_arrayXVelWPressure_negGeometry, Y_arrayXVelWPressure_negGeometry, X_arrayYVelWPressure_negGeometry, Y_arrayYVelWPressure_negGeometry
@@ -28,14 +30,32 @@ class LossHistory(keras.callbacks.Callback):
 
 def encoderDecoderXVelocity():
     name = 'EncoderDecoderXVel'
+    
+    #inputs = Input(shape=(128, 256, 1))
+    
+    #x1 = Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 1), activation='relu')(inputs)
+    #x2 = Conv2D(512, (4,4), padding='same', activation='relu')(x1)
+    #x3 = Flatten()(x2)
+    #x4 = Dense(512, activation='tanh')(x3)
+    #x5 = Reshape((128, 256, 512))(x4)
+    #x5 = np.reshape(x4, (128,256,512))
+    #x6 = Conv2DTranspose(512, (8,8), padding='same', input_shape=(128, 256, 512), activation='relu')(x5)
+    #x7 = Conv2DTranspose(256, (4,8), padding='same', activation='relu')(x6)
+    #x8 = Conv2DTranspose(32, (2,2), padding='same', activation='relu')(x7)
+    #x9 = Conv2DTranspose(1, (2,2), padding='same', activation='linear')(x8)
+    
+    #cnn = Model(inputs=inputs, outputs=x9)    
+    
     cnn = Sequential()
-    cnn.add(Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 1), activation='relu'))
-    cnn.add(Conv2D(512, (4,4), padding='same', activation='relu'))
-    cnn.add(Dense(512, activation='tanh'))
-    cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='linear'))
+    cnn.add(Conv2D(128, (8,16), strides= (8,16), input_shape=(128, 256, 1), activation='relu'))
+    cnn.add(Conv2D(512, (4,4), strides= (4,4), activation='relu'))
+    cnn.add(Flatten())
+    cnn.add(Dense(1024, activation='tanh'))
+    cnn.add(Reshape((1, 1, 1024), input_shape=(1024,)))
+    cnn.add(Conv2DTranspose(512, (8,8), strides= (8,8), activation='relu'))
+    cnn.add(Conv2DTranspose(256, (4,8), strides= (4,8), activation='relu'))
+    cnn.add(Conv2DTranspose(32, (2,2), strides= (2,2), activation='relu'))
+    cnn.add(Conv2DTranspose(1, (2,2), strides= (2,2), activation='linear'))
 
     #cnn.add(MaxPooling2D(pool_size=(2, 2))) 
     #cnn.add(Flatten())
@@ -70,20 +90,38 @@ def encoderDecoderXVelocity():
     plotArray(y_predictXVel[0,:,:,0], tempName)
     
     print(cnn.summary())
-    #plotLoss(cnnModel, "encoderDecoderXVelocityLoss")
+    plotLoss(cnnModel, "encoderDecoderXVelocityLoss")
     
     return y_predictXVel
 
 def encoderDecoderYVelocity():
     name = 'EncoderDecoderYVel'
+    
+    #inputs = Input(shape=(128, 256, 1))
+    
+    #x1 = Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 1), activation='relu')(inputs)
+    #x2 = Conv2D(512, (4,4), padding='same', activation='relu')(x1)
+    #x3 = Flatten()(x2)
+    #x4 = Dense(512, activation='tanh')(x3)
+    #x5 = Reshape((128, 256, 512))(x4)
+    #x5 = np.reshape(x4, (128,256,512))
+    #x6 = Conv2DTranspose(512, (8,8), padding='same', input_shape=(128, 256, 512), activation='relu')(x5)
+    #x7 = Conv2DTranspose(256, (4,8), padding='same', activation='relu')(x6)
+    #x8 = Conv2DTranspose(32, (2,2), padding='same', activation='relu')(x7)
+    #x9 = Conv2DTranspose(1, (2,2), padding='same', activation='linear')(x8)
+    
+    #cnn = Model(inputs=inputs, outputs=x9)
+    
     cnn = Sequential()
-    cnn.add(Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 1), activation='relu'))
-    cnn.add(Conv2D(512, (4,4), padding='same', activation='relu'))
-    cnn.add(Dense(100, activation='tanh'))
-    cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
-    cnn.add(Conv2DTranspose(1, (2,2), padding='same', activation='linear'))
+    cnn.add(Conv2D(128, (8,16), strides= (8,16), input_shape=(128, 256, 1), activation='relu'))
+    cnn.add(Conv2D(512, (4,4), strides= (4,4), activation='relu'))
+    cnn.add(Flatten())
+    cnn.add(Dense(1024, activation='tanh'))
+    cnn.add(Reshape((1, 1, 1024), input_shape=(1024,)))
+    cnn.add(Conv2DTranspose(512, (8,8), strides= (8,8), activation='relu'))
+    cnn.add(Conv2DTranspose(256, (4,8), strides= (4,8), activation='relu'))
+    cnn.add(Conv2DTranspose(32, (2,2), strides= (2,2), activation='relu'))
+    cnn.add(Conv2DTranspose(1, (2,2), strides= (2,2), activation='linear'))
 
     #cnn.add(MaxPooling2D(pool_size=(2, 2))) 
     #cnn.add(Flatten())
