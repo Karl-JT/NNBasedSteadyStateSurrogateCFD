@@ -9,7 +9,7 @@ from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
 
-#from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
+from excelToNumpy import X_array, Y_array, X_array3U, Y_array3U, X_array_negGeometry, Y_array_negGeometry, X_array3U_negGeometry, Y_array3U_negGeometry
 #from excelToNumpy import X_arrayXVelWPressure_negGeometry, Y_arrayXVelWPressure_negGeometry, X_arrayYVelWPressure_negGeometry, Y_arrayYVelWPressure_negGeometry
 
 from airfoilShapeExtractor import X_airfoil, Y_airfoil, X_airfoil3U, Y_airfoil3U, X_airfoil_negGeometry, Y_airfoil_negGeometry, X_airfoil3U_negGeometry, Y_airfoil3U_negGeometry
@@ -31,7 +31,7 @@ def encoderDecoderXVelocity():
     cnn = Sequential()
     cnn.add(Conv2D(128, (8,16), padding='same', input_shape=(128, 256, 1), activation='relu'))
     cnn.add(Conv2D(512, (4,4), padding='same', activation='relu'))
-    cnn.add(Dense(100, activation='tanh'))
+    cnn.add(Dense(512, activation='tanh'))
     cnn.add(Conv2DTranspose(512, (8,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(256, (4,8), padding='same', activation='relu'))
     cnn.add(Conv2DTranspose(32, (2,2), padding='same', activation='relu'))
@@ -117,7 +117,7 @@ def encoderDecoderYVelocity():
     tempName = name + 'Yvelocity'
     plotArray(y_predictYVel[0,:,:,0], tempName)
     
-    #plotLoss(cnnModel, "encoderDecoderYVelocityLoss")
+    plotLoss(cnnModel, "encoderDecoderYVelocityLoss")
 
     print(cnn.summary())
     return y_predictYVel
